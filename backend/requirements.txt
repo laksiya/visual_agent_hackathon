@@ -1,1 +1,7 @@
 fastapi[standard]
+langchain
+langchain_community
+langchain-openai
+playwright
+beautifulsoup4
+uvicorn
