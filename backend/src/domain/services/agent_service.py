@@ -4,6 +4,7 @@ import os
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
+from ...infrastructure.composio_agent import ComposioAgent
 
 load_dotenv()
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]
@@ -121,12 +122,53 @@ def extract_content_between_tags(
 async def ask_question_get_answer(question: str) -> dict:
     llm_chain = prompt | llm
     answer = llm_chain.invoke(input={"question": question, "lovdata": skatt_lovdata})
-    task = extract_content_between_tags(str(answer), opening_tag="<task>", closing_tag="</task>")
+    task_type = extract_content_between_tags(str(answer), opening_tag="<task>", closing_tag="</task>").strip()
     document_name = extract_content_between_tags(str(answer), opening_tag="<document-name>", closing_tag="</document-name>")
     message = extract_content_between_tags(str(answer), opening_tag="<message>", closing_tag="</message>")
+    print(task_type)
+    agent = ComposioAgent()
 
-    return {
-        "task": task,
-        "document_name": document_name,
-        "message": message
-    }
+    if "document" in task_type:
+        task = f"Save {message} in a new document called {document_name}."
+        print(task)
+        result = agent.execute_task(task)
+        print(result)
+        return {
+            "task": task_type,
+            "document_name": document_name,
+            "message": message,
+            "result": result
+        }
+
+    elif "spreadsheet" in task_type:
+        task = f"Save {message} in a new spreadsheet called {document_name}."
+        print(task)
+        result = agent.execute_task(task)
+        print(result)
+        return {
+            "task": task_type,
+            "document_name": document_name,
+            "message": message,
+            "result": result
+        }
+
+    elif "mail" in task_type:
+        task = f"Send an email with subject {document_name} and body {message} to laksiyab@gmail.com."
+        print(task)
+        result = agent.execute_task(task)
+        print(result)
+
+        return {
+            "task": task_type,
+            "document_name": document_name,
+            "message": message,
+            "result": result
+        }
+    
+    else:   
+        return {
+            "task": task_type,
+            "document_name": document_name,
+            "message": message,
+            "result": "No task found"
+        }
