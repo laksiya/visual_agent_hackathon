@@ -1,0 +1,14 @@
+{
+    "include": [
+        "backend/"
+    ],
+    "exclude": [
+        ".venv/",
+        "**/__pycache__",
+    ],
+    "executionEnvironments": [
+        {
+            "root": "backend"
+        }
+    ]
+}
