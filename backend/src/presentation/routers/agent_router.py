@@ -2,7 +2,7 @@ from fastapi import APIRouter, Query
 from typing import Annotated
 
 from ..dtos import AnswerResponse
-from ...domain.services.agent_service import ask_question_get_answer
+from domain.services.agent_service import ask_question_get_answer
 
 agent_router = APIRouter(prefix="/agent", tags=["Agent"])
 

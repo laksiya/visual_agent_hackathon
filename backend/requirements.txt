@@ -5,3 +5,5 @@ langchain-openai
 playwright
 beautifulsoup4
 uvicorn
+composio
+composio_langchain

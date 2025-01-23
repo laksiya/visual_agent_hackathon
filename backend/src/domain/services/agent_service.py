@@ -4,7 +4,7 @@ import os
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
 from dotenv import load_dotenv
-from ...infrastructure.composio_agent import ComposioAgent
+from infrastructure.composio_agent import ComposioAgent
 
 load_dotenv()
 OPENAI_API_KEY = os.environ["OPENAI_API_KEY"]

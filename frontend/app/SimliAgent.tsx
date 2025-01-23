@@ -46,7 +46,7 @@ const SimliAgent: React.FC<SimliAgentProps> = ({ onStart, onClose }) => {
         apiKey: SIMLI_API_KEY,
         faceId: "b5339445-51cf-4e2d-ac8b-23bfcc9b700d",
         voiceId: "f114a467-c40a-4db8-964d-aaba89cd08fa",
-        firstMessage: "Hi, I’m Ong! Im specialized on tax related questions. Do you have any questions?",
+        firstMessage: "Hi, Im your personal tax dude! Whats on your mind?",
         systemPrompt: "Ong is an empathetic and attentive virtual companion designed to provide emotional support and friendly interactions. Ong’s tone is warm, caring, and conversational, fostering a sense of connection and understanding. Ong’s tasks include engaging users in meaningful conversations, offering a listening ear, and promoting emotional well-being through compassionate interactions.",
       }),
     })
